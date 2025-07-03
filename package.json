@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/main.ts",
-    "start": "tsx src/main.ts"
+    "pro": "pnpm build && node dist/main.js",
+    "build": "rm -rf dist && tsc && tsc-alias && rsync -a --include=\"*/\" --exclude=\"*.ts\" src/ dist/",
+    "start": "node dist/main.js"
   },
   "keywords": [],
   "author": "",
@@ -14,13 +16,15 @@
   "dependencies": {
     "express": "^5.1.0",
     "morgan": "^1.10.0",
-    "node-schedule": "^2.1.1"
+    "node-schedule": "^2.1.1",
+    "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.0.10",
     "@types/node-schedule": "^2.1.7",
+    "tsc-alias": "^1.8.16",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   }

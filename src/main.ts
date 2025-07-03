@@ -1,5 +1,6 @@
-import globalConfig from '../config/global';
-import { httpTrigger, timerTrigger } from './trigger';
+import 'tsconfig-paths/register';
+import globalConfig from '@/config/global';
+import { httpTrigger, timerTrigger } from '@/trigger';
 
 const port = globalConfig.trigger.http.port;
 
