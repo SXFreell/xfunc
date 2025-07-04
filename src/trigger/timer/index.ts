@@ -1,8 +1,12 @@
 import schedule from 'node-schedule';
 
-class TimerTrigger {
+export default class TimerTrigger {
     // 储存Jobs
     private jobs: Map<string, schedule.Job> = new Map();
+
+    constructor() {
+        console.log('启动Timer触发器');
+    }
 
     // 新增Job
     scheduleJob(rule: string, callback: () => void) {
@@ -19,6 +23,4 @@ class TimerTrigger {
             this.jobs.delete(name);
         }
     }
-}
-
-export default TimerTrigger;
+};

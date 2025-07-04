@@ -1,15 +1,19 @@
 import 'tsconfig-paths/register';
-import globalConfig from '@/config/global';
 import { httpTrigger, timerTrigger } from '@/trigger';
+import { initFuncs, initPlugins } from '@/init';
 
-const port = globalConfig.trigger.http.port;
+const triggers = {
+    httpTrigger,
+    timerTrigger
+}
 
-httpTrigger.start(port);
+const plugins = initPlugins();
+const funcs = initFuncs(triggers, plugins);
 
-const jobName = timerTrigger.scheduleJob('*/1 * * * * *', () => {
-    console.log('定时任务执行，当前时间：', new Date());
-});
 
-setTimeout(() => {
-    timerTrigger.cancelJob(jobName);
-}, 5000);
+// import loadedPlugins from '@/plugins';
+
+// console.log(httpTrigger, timerTrigger)
+
+// 加载函数
+
