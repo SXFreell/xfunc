@@ -24,11 +24,12 @@ const initFuncs = async (triggers: any, plugins: Record<string, any>) => {
         if (funcConfig.trigger.timerTrigger) {
             const timerTrigger = triggers.timerTrigger;
             for (const timerTriggerConfig of funcConfig.trigger.timerTrigger) {
-
-                timerTrigger.scheduleJob(timerTriggerConfig.value, () => {
-                    const funcInstance = new funcsModule[name](enablePlugin);
-                    funcInstance.run();
-                });
+                if (timerTriggerConfig.type === 'cron') {
+                    timerTrigger.scheduleJob(timerTriggerConfig.value, () => {
+                        const funcInstance = new funcsModule[name](enablePlugin, timerTriggerConfig.params);
+                        funcInstance.run();
+                    });
+                }
             }
         }
     }
