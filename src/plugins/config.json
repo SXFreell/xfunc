@@ -4,10 +4,7 @@
             "name": "WecomWebhook",
             "enable": true,
             "description": "企业微信Webhook插件",
-            "version": "v1.0.0",
-            "options": {
-                "webhook": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key="
-            }
+            "version": "v1.0.0"
         }
     ]
 }

@@ -1,3 +1,46 @@
 {
-    
+    "funcs": [
+        {
+            "name": "demo",
+            "enable": true,
+            "description": "示例",
+            "trigger": {
+                "httpTrigger": [
+                    {
+                        "name": "httpDemo",
+                        "path": "/demo",
+                        "method": "GET",
+                        "params": [
+                            {
+                                "name": "demoParams",
+                                "type": "string",
+                                "default": "demo",
+                                "required": true,
+                                "description": "示例参数"
+                            }
+                        ]
+                    }
+                ],
+                "timerTrigger": [
+                    {
+                        "name": "timerDemo",
+                        "type": "cron",
+                        "value": "0 0 0 * * *",
+                        "params": [
+                            {
+                                "name": "demoParams",
+                                "type": "string",
+                                "default": "demo",
+                                "required": true,
+                                "description": "示例参数"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "plugin": [
+                "WecomWebhook"
+            ]
+        }
+    ]
 }

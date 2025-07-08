@@ -5,10 +5,14 @@ import { initFuncs, initPlugins } from '@/init';
 const triggers = {
     httpTrigger,
     timerTrigger
-}
+};
 
-const plugins = initPlugins();
-const funcs = initFuncs(triggers, plugins);
+
+(async () => {
+    const plugins = await initPlugins();
+    initFuncs(triggers, plugins);
+})();
+
 
 
 // import loadedPlugins from '@/plugins';
