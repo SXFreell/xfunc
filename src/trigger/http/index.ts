@@ -1,8 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
-import globalConfig from '@/config/global';
+import config from '@/config';
 
-const port = globalConfig.trigger.http.port;
+const port = config.trigger.http.port;
 export default class HttpTrigger {
     private app: express.Express;
 

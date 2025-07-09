@@ -1,11 +1,12 @@
 export default class DemoFunc {
-    constructor(private plugins: Record<string, any>, private params: Record<string, any>) {
+    private plugins: Record<string, any>;
+    private params: Record<string, any>;
+    private wecomWebhook: any;
+    constructor(plugins: Record<string, any>, params: Record<string, any>) {
         this.plugins = plugins;
         this.params = params;
+        this.wecomWebhook = new this.plugins.WecomWebhook('**********');
     }
-
-    // 下面编写用户代码
-    private wecomWebhook = new this.plugins.WecomWebhook('**********');
 
 
     async run() {

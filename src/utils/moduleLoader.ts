@@ -1,3 +1,5 @@
+import path from 'path';
+
 // 动态加载模块
 const moduleLoader = (modulePath: string, moduleNameList: string[]) => {
   const modules: Record<string, any> = {};
@@ -11,8 +13,10 @@ const moduleLoader = (modulePath: string, moduleNameList: string[]) => {
         const errorList = [];
         for (const moduleName of moduleNameList) {
             try {
-                // 插件目录与name相同，入口文件为index.ts
-                const module = await import(`@/${modulePath}/${moduleName}/index.ts`);
+                // 插件目录与name相同，入口文件为index
+                const basePath = path.join(__dirname, `../${modulePath}/${moduleName}`);
+                const entry = process.env.NODE_ENV === 'production' ? 'index.js' : 'index.ts';
+                const module = await import(`${basePath}/${entry}`);
                 modules[moduleName] = module.default || module;
             } catch (error) {
                 if (modules[moduleName]) {

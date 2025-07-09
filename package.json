@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/main.ts",
-    "pro": "pnpm build && node dist/main.js",
+    "dev": "export NODE_ENV=development && tsx watch src/main.ts",
+    "pro": "export NODE_ENV=production && pnpm build && node dist/main.js",
     "build": "rm -rf dist && tsc && tsc-alias && rsync -a --include=\"*/\" --exclude=\"*.ts\" src/ dist/",
     "start": "node dist/main.js"
   },
@@ -16,6 +16,7 @@
   "dependencies": {
     "axios": "^1.10.0",
     "express": "^5.1.0",
+    "jose": "^6.0.11",
     "morgan": "^1.10.0",
     "node-schedule": "^2.1.1",
     "tsconfig-paths": "^4.2.0"

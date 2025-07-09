@@ -7,7 +7,11 @@ const env = {
 
 export default class WecomWebhook {
     private request: any;
-    constructor(private secret: string, private webhookUrl = env.webhook) {
+    private secret: string;
+    private webhookUrl: string;
+    constructor(secret: string, webhookUrl = env.webhook) {
+        this.secret = secret;
+        this.webhookUrl = webhookUrl;
         this.request = new Request(webhookUrl + secret, {
             'Content-Type': 'application/json',
         });
