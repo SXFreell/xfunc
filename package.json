@@ -1,6 +1,6 @@
 {
   "name": "xfunc",
-  "version": "0.1.0.20250702",
+  "version": "0.1.1.20250710",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "start": "node dist/main.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Shirosu(xfreell@163.com)",
   "license": "ISC",
   "packageManager": "pnpm@10.12.4",
   "dependencies": {
