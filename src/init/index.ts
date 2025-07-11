@@ -60,7 +60,7 @@ const initFuncs = async (triggers: any, plugins: Record<string, any>) => {
                             res.json({code: 1, message: 'success'});
                         } catch (error) {
                             console.error(error);
-                            res.send({code: 0, message: 'error'});
+                            res.json({code: 0, message: 'error'});
                         }
                     });
                 } else if (httpTriggerConfig.method === 'POST') {
@@ -76,7 +76,7 @@ const initFuncs = async (triggers: any, plugins: Record<string, any>) => {
                             res.json({code: 1, message: 'success'});
                         } catch (error) {
                             console.error(error);
-                            res.send({code: 0, message: 'error'});
+                            res.json({code: 0, message: 'error'});
                         }
                     });
                 }
