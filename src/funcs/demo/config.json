@@ -7,12 +7,14 @@
             {
                 "name": "httpDemo",
                 "path": "/demo",
-                "method": "GET"
+                "method": "GET",
+                "enable": true
             }
         ],
         "timerTrigger": [
             {
                 "name": "timerDemo",
+                "enable": true,
                 "type": "cron",
                 "value": "*/2 * * * * *",
                 "params": {
@@ -21,6 +23,7 @@
             },
             {
                 "name": "timerDemo",
+                "enable": true,
                 "type": "cron",
                 "value": "*/5 * * * * *",
                 "params": {
