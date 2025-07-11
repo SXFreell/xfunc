@@ -21,9 +21,8 @@ export default class HttpTrigger {
                     if (!origin) {
                         return callback(null, true);
                     }
-                    
-                    const allowedOrigins = config.trigger.http.cors.origins || [];
-                    if (allowedOrigins.includes(origin)) {
+                    const allowedOrigins: string[] = config.trigger.http.cors.origins || [];
+                    if (origin && allowedOrigins.includes(origin)) {
                         callback(null, true);
                     } else {
                         callback(new Error('Not allowed by CORS'));
