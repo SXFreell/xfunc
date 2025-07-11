@@ -1,0 +1,35 @@
+{
+    "name": "demo",
+    "enable": false,
+    "description": "示例",
+    "trigger": {
+        "httpTrigger": [
+            {
+                "name": "httpDemo",
+                "path": "/demo",
+                "method": "GET"
+            }
+        ],
+        "timerTrigger": [
+            {
+                "name": "timerDemo",
+                "type": "cron",
+                "value": "*/2 * * * * *",
+                "params": {
+                    "type": "test1"
+                }
+            },
+            {
+                "name": "timerDemo",
+                "type": "cron",
+                "value": "*/5 * * * * *",
+                "params": {
+                    "type": "test2"
+                }
+            }
+        ]
+    },
+    "plugin": [
+        "WecomWebhook"
+    ]
+}

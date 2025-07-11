@@ -1,9 +1,5 @@
-// 函数配置根节点
-export interface FuncConfigRoot {
-    funcs: FuncConfigItem[];
-}
-
-interface FuncConfigItem {
+// 函数配置
+export interface FuncConfigItem {
     name: string;
     enable: boolean;
     description?: string;
@@ -31,12 +27,8 @@ interface HttpTrigger {
     method: string;
 }
 
-// 插件配置根节点
-export interface PluginConfigRoot {
-    plugins: PluginConfigItem[];
-}
-
-interface PluginConfigItem {
+// 插件配置
+export interface PluginConfigItem {
     name: string;
     enable: boolean;
     description?: string;

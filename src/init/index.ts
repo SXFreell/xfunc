@@ -1,20 +1,56 @@
 import moduleLoader from '@/utils/moduleLoader';
-import { PluginConfigRoot, FuncConfigRoot } from './type';
-import originPluginConfig from '@/plugins/config.json';
-import originFuncConfig from '@/funcs/config.json';
+import { PluginConfigItem, FuncConfigItem } from './type';
+import fs from 'fs';
+import path from 'path';
 
-const pluginConfig: PluginConfigRoot = originPluginConfig;
-const funcConfig: FuncConfigRoot = originFuncConfig;
+// 动态读取所有插件目录下的config.json
+function getAllPluginConfigs(): PluginConfigItem[] {
+    const pluginsDir = path.join(__dirname, '../plugins');
+    const pluginDirs = fs.readdirSync(pluginsDir).filter(name => {
+        const fullPath = path.join(pluginsDir, name);
+        return fs.statSync(fullPath).isDirectory();
+    });
+    const plugins = pluginDirs.map(dir => {
+        const configPath = path.join(pluginsDir, dir, 'config.json');
+        if (fs.existsSync(configPath)) {
+            const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+            return config;
+        }
+        return null;
+    }).filter(Boolean);
+    return plugins;
+}
+
+// 动态读取所有函数目录下的config.json
+function getAllFuncConfigs(): FuncConfigItem[] {
+    const funcsDir = path.join(__dirname, '../funcs');
+    const funcDirs = fs.readdirSync(funcsDir).filter(name => {
+        const fullPath = path.join(funcsDir, name);
+        return fs.statSync(fullPath).isDirectory();
+    });
+    const funcs = funcDirs.map(dir => {
+        const configPath = path.join(funcsDir, dir, 'config.json');
+        if (fs.existsSync(configPath)) {
+            const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+            return config;
+        }
+        return null;
+    }).filter(Boolean);
+    return funcs;
+}
+
+const pluginConfig = getAllPluginConfigs();
+const funcConfig = getAllFuncConfigs();
 
 const initPlugins = async (): Promise<Record<string, any>> => {
-    const pluginNameList = pluginConfig.plugins.filter(item => item.enable).map(item => item.name);
+    const pluginNameList = pluginConfig.filter(item => item.enable).map(item => item.name);
     const { modules: plugins, errorList } = await moduleLoader('plugins', pluginNameList);
     console.log(`插件加载完成，成功加载 ${Object.keys(plugins).length} 个，失败 ${errorList.length} 个`);
     return plugins;
 }
 
 const initFuncs = async (triggers: any, plugins: Record<string, any>) => {
-    const funcEnableList = funcConfig.funcs.filter(item => item.enable);
+    const funcEnableList = funcConfig.filter(item => item.enable);
     const funcNameList = funcEnableList.map(item => item.name);
     const { modules: funcsModule, errorList } = await moduleLoader('funcs', funcNameList);
     console.log(`函数模块加载完成，成功加载 ${Object.keys(funcsModule).length} 个，失败 ${errorList.length} 个`);

@@ -1,0 +1,6 @@
+{
+    "name": "WecomWebhook",
+    "enable": true,
+    "description": "企业微信Webhook插件",
+    "version": "v1.0.0"
+}
